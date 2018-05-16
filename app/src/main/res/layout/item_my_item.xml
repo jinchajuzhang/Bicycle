@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/selector_my_useritem"
+    android:gravity="center_vertical"
+    >
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/siv_my_item_pic"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:padding="15dp"
+        />
+    <TextView
+        android:id="@+id/tv_my_item_context"
+        android:layout_width="0dp"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+</LinearLayout>

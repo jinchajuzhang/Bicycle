@@ -1,0 +1,1 @@
+include ':app', ':android-smart-image-view-1.0.0', ':magicindicator', ':xrecyclerview', ':xutils', ':gson-2.5', ':library'

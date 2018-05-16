@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_dialog_changemessage_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:background="@drawable/shape_itembottom_line"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        tools:text="修改信息"
+        />
+    <com.example.juzhang.bicycle.View.ClearEditText
+        android:id="@+id/cet_dialog_changemessage_message"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_login_edittext_bg"
+        android:layout_margin="15dp"
+        />
+    <Button
+        android:id="@+id/btn_dialog_changemessage_submit"
+        android:text="@string/tv_change"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/selector_login_btnlogin_bg"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

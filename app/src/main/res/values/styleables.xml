@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--ShowClientView的属性-->
+    <declare-styleable name="S_ShowClientView">
+        <attr name="cwBk" format="reference"/>
+
+        <attr name="cwTypeColor" format="color"/>                       <!--配送方式字体颜色-->
+        <attr name="cwTypeSize" format="dimension"/>                    <!--配送方式字体颜色-->
+
+        <attr name="cwDetailsColor" format="color"/>                    <!--详细信息方式字体颜色-->
+        <attr name="cwDetailsSize" format="dimension"/>                 <!--详细信息字体颜色-->
+    </declare-styleable>
+
+</resources>

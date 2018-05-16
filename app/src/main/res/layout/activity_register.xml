@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.juzhang.bicycle.Activity.LoginActivity">
+    <RelativeLayout
+        android:id="@+id/home_head"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_home_head"
+        android:layout_height="45dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tv_register2"
+            android:textSize="18sp"
+            android:gravity="center" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:onClick="backPress"
+            android:src="@drawable/ic_left"
+            />
+    </RelativeLayout>
+
+    <com.example.juzhang.bicycle.View.ClearEditText
+        android:id="@+id/cet_register_username"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/icon_user_m"
+        android:hint="@string/tv_pleaseinputusername"
+        style="@style/EditTextStyle" />
+    <com.example.juzhang.bicycle.View.ClearEditText
+        android:id="@+id/cet_register_password"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/icon_lock_m"
+        android:inputType="textPassword"
+        android:hint="@string/tv_pleaseinputpassword"
+        style="@style/EditTextStyle" />
+    <com.example.juzhang.bicycle.View.ClearEditText
+        android:id="@+id/cet_register_qq"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/icon_qq_m"
+        android:hint="@string/tv_inputqq"
+        style="@style/EditTextStyle" />
+    <com.example.juzhang.bicycle.View.ClearEditText
+        android:id="@+id/cet_register_email"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/icon_email_m"
+        android:hint="@string/tv_inputemail"
+        style="@style/EditTextStyle" />
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/cb_register_agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/tv_agree"
+            />
+        <TextView
+            android:id="@+id/tv_register_rule"
+            android:layout_width="0dp"
+            android:textSize="16sp"
+            android:text="@string/tv_rule"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_register_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:enabled="false"
+        android:background="@drawable/selector_login_btnlogin_bg"
+        android:layout_margin="20dp"
+        android:textColor="@drawable/selector_login_textlogin_bg"
+        android:text="@string/tv_register2"
+        android:textSize="17sp"
+        />
+</LinearLayout>

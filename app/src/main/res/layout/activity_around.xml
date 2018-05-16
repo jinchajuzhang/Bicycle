@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#e8e8e8"
+    android:orientation="vertical"
+    android:id="@+id/actv_layout_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cw.androidex.h.androidexersize.actv.LayoutTestActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/map"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_periphery_1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+                <TextView
+                    android:text="周边车行"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"/>
+
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_clickable"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/imageView"/>
+            </LinearLayout>
+
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/shape_center_line"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_periphery_2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+                <TextView
+                    android:text="常世同行"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="61dp"/>
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_clickable"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/shape_center_line"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_periphery_3"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+                <TextView
+                    android:text="单车竞赛"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"/>
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitEnd"
+                    android:padding="10dp"
+                    android:src="@drawable/vector_clickable"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

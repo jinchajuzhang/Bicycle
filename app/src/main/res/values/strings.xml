@@ -1,0 +1,80 @@
+﻿<resources>
+    <string name="app_name">易单车</string>
+    <string name="iv_picture">图片</string>
+    <string name="tv_clicklogin">还未登陆，点击登陆</string>
+    <string name="tv_login">登陆</string>
+    <string name="tv_pleaseinputusername">请输入用户名</string>
+    <string name="tv_pleaseinputpassword">请输入密码</string>
+    <string name="tv_register">立即注册</string>
+    <string name="tv_forgetpassword">忘记密码?</string>
+    <string name="tv_inputqq">请输入您的QQ号码</string>
+    <string name="tv_inputemail">请输入您的邮箱</string>
+    <string name="tv_register2">注册</string>
+    <string name="tv_waiting">请稍后...</string>
+    <string name="tv_registerfaild">注册失败，请稍后再试！</string>
+    <string name="tv_registersuccess">注册成功！</string>
+    <string name="tv_agree">同意</string>
+    <string name="tv_rule">《易单车使用条例规范》</string>
+    <string name="tv_logoff">注销</string>
+
+
+    <string name="bicycle_name">单车名称</string>
+    <string name="amount">数量</string>
+    <string name="money_RMB">元</string>
+    <string name="Delivery">店内骑送</string>
+    <string name="GoStore">上门提取</string>
+    <string name="btnSubmit">提交订单</string>
+    <string name="btnOk">确定</string>
+    <string name="btnCancel">取消</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="store_address_title">我们的店铺</string>
+    <string name="click_to_details">点击查看详情</string>
+
+    <string name="ClientName">姓名</string>
+    <string name="ClientAddress">地址</string>
+    <string name="ClientZipCode">邮编</string>
+    <string name="ClientPhone">电话</string>
+
+    <string name="please_login">您还没有登录，点击图片登录！</string>
+
+    <!--buy_rent_menu菜单项-->
+    <string name="buy_rent_m1">菜单1</string>
+    <string name="buy_rent_m2">菜单2</string>
+    <string name="buy_rent_m3">菜单3</string>
+    <string name="buy_rent_m4">菜单4</string>
+
+    <string name="store_address"><!--店铺地址-->
+        店铺地址：重庆市永川区重庆大学城科市技学院\n
+        店主：XXX\n
+        店主联系方式：123456789
+    </string>
+    <string name="clientMessage">                    <!--客户留言EditText的提示-->
+        请输入您给店主的留言或者要求
+    </string>
+    <string name="tv_waitforupdate">该功能暂不开放，请等待更新</string>
+    <string name="tv_nologinpresstologin">您还没有登陆\n点击图片进行登陆</string>
+    <string name="btn_pressreturncar">点击还车</string>
+    <string name="tv_nocartoreturn">您当前没有可以归还的车辆</string>
+    <string name="tv_startrental">开始租车</string>
+    <string name="tv_rentalprivce">租用单价:￥</string>
+    <string name="tv_type">类型：</string>
+    <string name="tv_purpose">用途：</string>
+    <string name="tv_rentalnumber">租用数量</string>
+    <string name="tv_rentaltime">租用时间(小时)</string>
+    <string name="tv_inputleave">这里输入您的留言,对本次交易的说明...</string>
+    <string name="tv_submit">提交订单</string>
+    <string name="tv_sumprice">总价：</string>
+    <string name="tv_distribution">配送方式</string>
+    <string name="tv_unknown">未知</string>
+    <string name="_1">1</string>
+    <string name="tv_inputaddress">请填写您的收货地址</string>
+    <string name="tv_￥">￥</string>
+    <string name="tv_ridetoyou">骑车上门</string>
+    <string name="tv_ridetoyouself">上店自提</string>
+    <string name="tv_chooseridetype">选择配送方式</string>
+    <string name="tv_close">关闭</string>
+    <string name="tv_shopaddress">请到实体店 重庆大学南门 进行取车</string>
+    <string name="tv_changemessage">修改信息</string>
+    <string name="tv_change">修改</string>
+    <string name="tv_hour">/小时</string>
+</resources>

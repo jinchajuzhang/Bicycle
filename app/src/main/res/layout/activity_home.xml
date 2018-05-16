@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.juzhang.bicycle.Activity.HomeActivity">
+    <LinearLayout
+        android:id="@+id/home_head"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_home_head"
+        android:layout_height="45dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home_fragmentviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/rg_home_bottom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@drawable/shape_itemtop_line"
+        android:layout_height="50dp">
+        <RadioButton
+            android:id="@+id/rb_home_rental"
+            style="@style/RadioButtonDrawableTop"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_radiobutton_rental"
+            android:text="租车" />
+
+        <RadioButton
+            android:id="@+id/rb_home_return"
+            style="@style/RadioButtonDrawableTop"
+            android:drawableTop="@drawable/selector_radiobutton_return"
+            android:text="还车"
+            />
+        <RadioButton
+            android:id="@+id/rb_home_my"
+            style="@style/RadioButtonDrawableTop"
+            android:drawableTop="@drawable/selector_radiobutton_my"
+            android:text="我的"
+            />
+    </RadioGroup>
+</LinearLayout>

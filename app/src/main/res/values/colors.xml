@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="rentalMenuTextColorNomal">#999999</color>
+    <color name="rentalMenuTextColorChecked">#ff0000</color>
+
+    <color name="MainColorDim">#a3f9ec39</color>
+    <color name="MainColor">#dce3ac2c</color>
+    <color name="MainColorPressed">#fbffa703</color>
+    <color name="White">#00FFFFFF</color>
+    <color name="CommBkColorPress">#ffcbcbcb</color>
+
+    <color name="btnSubmitDim">#c2b45530</color>
+    <color name="btnSubmitNormal">#e0eb1a1a</color>
+    <color name="btnSubmitPressed">#f4ff0015</color>
+
+    <color name="colorGray">#f5f5f5</color>
+    <color name="colorWhite">#ffffff</color>
+</resources>

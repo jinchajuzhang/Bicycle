@@ -1,0 +1,16 @@
+<resources>
+
+    <dimen name="BRLytHor">0dp</dimen>                  <!--buy_rent_lyt水平边距-->
+    <dimen name="BRLytVer">0dp</dimen>                  <!--buy_rent_lyt垂直边距-->
+    <dimen name="BRLytBicycleImg">128dp</dimen>         <!--单车图片大小-->
+    <dimen name="BRLytComponent">12dp</dimen>           <!--buy_rent_lyt组件间间距-->
+    <dimen name="BRLytCountSize">50dp</dimen>           <!--单车数量有关的3个控件的长宽-->
+    <dimen name="BRLytClientMsg">200dp</dimen>          <!--用户留言EditText高度-->
+
+    <dimen name="PWManagerHeight">300dp</dimen>          <!--从下至上的弹窗高度-->
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>           <!--客户留言EditText高度-->
+
+</resources>

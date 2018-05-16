@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:juzhang="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e9e9e9"
+    tools:context="com.example.juzhang.bicycle.Activity.UserMessageActivity">
+    <RelativeLayout
+        android:id="@+id/home_head"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_home_head"
+        android:layout_height="45dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/tv_changemessage"
+            android:textSize="18sp"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:onClick="backPress"
+            android:src="@drawable/ic_left" />
+    </RelativeLayout>
+    <com.example.juzhang.bicycle.View.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--账号信息-->
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_headicon"
+                android:onClick="buttonClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                juzhang:name="头像"
+                juzhang:userpicheight="40dp"
+                juzhang:userpicwidth="40dp"
+                juzhang:userpicsrc="@drawable/icon_user" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_nickname"
+                android:onClick="buttonClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                juzhang:name="昵称"
+                juzhang:usertext="" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_username"
+                android:layout_width="match_parent"
+                android:onClick="buttonClick"
+                android:layout_height="wrap_content"
+                juzhang:name="账号"
+                juzhang:usertext="gaojunyi"
+                juzhang:noline="true"
+                android:layout_marginBottom="20dp"
+                />
+            <!--用户信息-->
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_qq"
+                android:layout_width="match_parent"
+                android:onClick="buttonClick"
+                android:layout_height="wrap_content"
+                juzhang:name="QQ"
+                juzhang:usertext="" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_email"
+                android:layout_width="match_parent"
+                android:onClick="buttonClick"
+                android:layout_height="wrap_content"
+                juzhang:name="Email"
+                juzhang:usertext="" />
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_realname"
+                android:layout_width="match_parent"
+                android:onClick="buttonClick"
+                android:layout_height="wrap_content"
+                juzhang:name="真实姓名"
+                juzhang:usertext="" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_sex"
+                android:onClick="buttonClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                juzhang:name="性别"
+                juzhang:usertext="" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_phone"
+                android:onClick="buttonClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                juzhang:name="电话号码"
+                juzhang:usertext="" />
+
+            <com.example.juzhang.bicycle.View.MyUserMessageItemView
+                android:id="@+id/mmiv_usermessage_wechat"
+                android:layout_width="match_parent"
+                android:onClick="buttonClick"
+                android:layout_height="wrap_content"
+                juzhang:name="微信"
+                juzhang:noline="true"
+                juzhang:usertext="" />
+        </LinearLayout>
+    </com.example.juzhang.bicycle.View.MyScrollView>
+</LinearLayout>

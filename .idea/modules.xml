@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bicycle.iml" filepath="$PROJECT_DIR$/Bicycle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-smart-image-view-1.0.0/android-smart-image-view-1.0.0.iml" filepath="$PROJECT_DIR$/android-smart-image-view-1.0.0/android-smart-image-view-1.0.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gson-2.5/gson-2.5.iml" filepath="$PROJECT_DIR$/gson-2.5/gson-2.5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" filepath="$PROJECT_DIR$/xrecyclerview/xrecyclerview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xutils/xutils.iml" filepath="$PROJECT_DIR$/xutils/xutils.iml" />
+    </modules>
+  </component>
+</project>

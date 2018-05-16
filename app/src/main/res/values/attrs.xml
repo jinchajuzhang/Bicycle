@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyItemView">
+        <attr name="picsrc" format="reference" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="MyOrderExtraItem">
+        <attr name="extraitemtext" format="string" />
+        <attr name="checked" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyUserMessageItemView">
+        <attr name="userpicsrc" format="reference"/>
+        <attr name="name"  format="string"/>
+        <attr name="usertext" format="string"/>
+        <attr name="noline" format="boolean"/>
+        <attr name="userpicwidth" format="dimension"/>
+        <attr name="userpicheight" format="dimension"/>
+    </declare-styleable>
+</resources>

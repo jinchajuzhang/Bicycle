@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:padding="10dp"
+    android:background="#ffffff"
+    android:gravity="center"
+    >
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_faild"
+        android:contentDescription="@string/iv_picture"
+        />
+    <TextView
+        android:id="@+id/tv_dialog_faild_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_registerfaild"
+        android:layout_marginLeft="15dp"
+        android:textSize="16sp"
+        />
+</LinearLayout>
