@@ -13,6 +13,10 @@ import java.util.Map;
 public class ServerResultJson implements Serializable {
     private Integer code;
     private String message;
+    private Integer sumItems;
+    private Integer currentPage;
+    private Integer sumPage;
+    private Integer perPageItems;
     private Object data;
 
     public Integer getCode() {
@@ -25,6 +29,38 @@ public class ServerResultJson implements Serializable {
 
     public String getMessage() {
         return message;
+    }
+
+    public Integer getSumItems() {
+        return sumItems;
+    }
+
+    public void setSumItems(Integer sumItems) {
+        this.sumItems = sumItems;
+    }
+
+    public Integer getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Integer currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public Integer getSumPage() {
+        return sumPage;
+    }
+
+    public void setSumPage(Integer sumPage) {
+        this.sumPage = sumPage;
+    }
+
+    public Integer getPerPageItems() {
+        return perPageItems;
+    }
+
+    public void setPerPageItems(Integer perPageItems) {
+        this.perPageItems = perPageItems;
     }
 
     public void setMessage(String message) {

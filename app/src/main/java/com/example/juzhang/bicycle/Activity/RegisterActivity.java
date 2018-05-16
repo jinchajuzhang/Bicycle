@@ -17,25 +17,32 @@ import com.example.juzhang.bicycle.Bean.UserMessage;
 import com.example.juzhang.bicycle.R;
 import com.example.juzhang.bicycle.Utils.DialogUtils;
 import com.example.juzhang.bicycle.Utils.JSON;
+import com.example.juzhang.bicycle.Utils.L;
+import com.example.juzhang.bicycle.Utils.Net;
 import com.example.juzhang.bicycle.View.ClearEditText;
-import com.google.gson.Gson;
+import com.geetest.sdk.Bind.GT3GeetestBindListener;
+import com.geetest.sdk.Bind.GT3GeetestUtilsBind;
+import com.geetest.sdk.GT3GeetestButton;
+import com.geetest.sdk.GT3GeetestListener;
+import com.geetest.sdk.GT3GeetestUtils;
 
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private DialogUtils mDialogUtils;
 
     private ClearEditText cet_username;
     private ClearEditText cet_password;
-    private ClearEditText cet_qq;
+    private ClearEditText cet_comfirmpassword;
+    private ClearEditText cet_mobile;
     private ClearEditText cet_email;
     private Button btn_register;
     private CheckBox cb_agree;
+    private GT3GeetestButton ggb_verify;
     private MyHandler myHandler = new MyHandler(this);
 
     private static class MyHandler extends Handler{
@@ -84,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mDialogUtils = new DialogUtils(this);
         initUI();
+        initData();
     }
 
     /**
@@ -100,10 +108,12 @@ public class RegisterActivity extends AppCompatActivity {
     private void initUI() {
         cet_username = (ClearEditText) findViewById(R.id.cet_register_username);
         cet_password = (ClearEditText) findViewById(R.id.cet_register_password);
-        cet_qq = (ClearEditText) findViewById(R.id.cet_register_qq);
+        cet_comfirmpassword = (ClearEditText) findViewById(R.id.cet_register_comfirmpassword);
+        cet_mobile = (ClearEditText) findViewById(R.id.cet_register_mobile);
         cet_email = (ClearEditText) findViewById(R.id.cet_register_email);
         btn_register = (Button) findViewById(R.id.btn_register_register);
         cb_agree = (CheckBox) findViewById(R.id.cb_register_agree);
+        ggb_verify = (GT3GeetestButton) findViewById(R.id.ggb_verify);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserMessage userMessage = new UserMessage();
                     userMessage.setUserName(cet_username.getText().toString());
                     userMessage.setPassword(cet_password.getText().toString());
-                    userMessage.setQq(cet_qq.getText().toString());
+                    userMessage.setPhone(cet_mobile.getText().toString());
                     userMessage.setEmail(cet_email.getText().toString());
                     //开始注册
                     startRegister(userMessage);
@@ -126,6 +136,26 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        GT3GeetestUtils instance = GT3GeetestUtils.getInstance(RegisterActivity.this);
+        instance.getGeetest(ContentValues.CAPTCHAURL,ContentValues.VALIDATEURL, null, new GT3GeetestListener() {
+            @Override
+            public void gt3FirstResult(JSONObject jsonObject) {
+                super.gt3FirstResult(jsonObject);
+                String test  =jsonObject.toString();
+                L.v(test);
+            }
+
+            @Override
+            public void gt3DialogSuccessResult(String s) {
+                super.gt3DialogSuccessResult(s);
+                L.v(s);
+            }
+        });
+    }
 
     /**
      * 开始注册
@@ -133,24 +163,20 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private void startRegister(UserMessage userMessage) {
         mDialogUtils.startWaitingDialog(View.inflate(this,R.layout.dialog_waiting,null));
-        RequestParams requestParams = new RequestParams(ContentValues.REGISTERDOMAIN);
-        requestParams.addParameter("username",userMessage.getUserName());
-        requestParams.addParameter("password",userMessage.getPassword());
-        requestParams.addParameter("qq",userMessage.getQq());
-        requestParams.addParameter("email",userMessage.getEmail());
-        x.http().post(requestParams, new Callback.CacheCallback<String>() {
+        Map<String,Object> params = new HashMap<>();
+        params.put("username",userMessage.getUserName());
+        params.put("password",userMessage.getPassword());
+        params.put("mobile",userMessage.getPhone());
+        params.put("email",userMessage.getEmail());
+        Net.post(this, ContentValues.REGISTERDOMAIN, params, new Net.netCallBack() {
             @Override
-            public boolean onCache(String result) {
-                return false;
-            }
-            @Override
-            public void onSuccess(String result) {
-                HashMap resultMap = JSON.parse(result);
-                switch((Integer) resultMap.get("code")){
+            public void success(String data) {
+                ServerResultJson result = JSON.parseToServerResult(data);
+                switch(result.getCode()){
                     case 0://失败
                         Message msg = Message.obtain();
                         msg.what = MyHandler.REGISTERFAILD;
-                        msg.obj = resultMap.get("message");
+                        msg.obj = result.getMessage();
                         myHandler.sendMessage(msg);
                         break;
                     case 1://成功
@@ -158,20 +184,13 @@ public class RegisterActivity extends AppCompatActivity {
                         break;
                 }
             }
+
             @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
+            public void error(Throwable ex) {
                 Message msg = Message.obtain();
                 msg.what = MyHandler.REGISTERFAILD;
                 msg.obj = "网络错误！请稍后再试";
                 myHandler.sendMessage(msg);
-            }
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-            @Override
-            public void onFinished() {
-
             }
         });
     }
@@ -189,8 +208,12 @@ public class RegisterActivity extends AppCompatActivity {
             cet_password.startShakeAnimation(null,3,"还没有输入密码！");
             return false;
         }
-        if(cet_qq.getText().toString().equals("")){
-            cet_qq.startShakeAnimation(null,3,"还没有输入QQ！");
+        if(!cet_comfirmpassword.getText().toString().equals(cet_password.getText().toString())){
+            cet_comfirmpassword.startShakeAnimation(null,3,"两次密码输入不同！");
+            return false;
+        }
+        if(cet_mobile.getText().toString().equals("")){
+            cet_mobile.startShakeAnimation(null,3,"还没有输入手机号！");
             return false;
         }
         if(cet_email.getText().toString().equals("")){

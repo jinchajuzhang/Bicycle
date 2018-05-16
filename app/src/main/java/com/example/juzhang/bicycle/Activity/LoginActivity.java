@@ -193,11 +193,11 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 保存会话信息
      * @return 是否成功
+     * @param data 服务器通用返回数据结果
      */
     private boolean saveSessionMessage(ServerResultJson data){
-        Map<String, Object> result = (Map<String, Object>) data.getData();
-        String userId = (String)result.get("userId");
-        String token = (String)result.get("token");
+        String userId = (String)((Map)data.getData()).get("userId");
+        String token = (String)((Map)data.getData()).get("token");
         SharedPreferencesUtils.putObjectToShare(this,userId,"userId");
         SharedPreferencesUtils.putObjectToShare(this,token,"token");
         return true;

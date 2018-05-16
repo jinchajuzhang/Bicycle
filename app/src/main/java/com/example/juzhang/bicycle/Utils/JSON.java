@@ -1,13 +1,13 @@
 package com.example.juzhang.bicycle.Utils;
 
 import com.example.juzhang.bicycle.Bean.ServerResultJson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-
-import org.apache.commons.beanutils.BeanUtils;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,13 +19,47 @@ import java.util.Map;
 public class JSON {
 
     private static Gson gson = new Gson();
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
+     * 将json 转为指定的类型
+     * @param jsonStr json字符串
+     * @param tClass 指定类型的class
+     * @return 指定类型
+     */
+    public static <T> T parseToBean(String jsonStr,Class<T> tClass){
+        T bean = null;
+        try {
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            bean = objectMapper.readValue(jsonStr, tClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bean;
+    }
+
     /**
      * 将json字符串转为Map集合
      * @param jsonStr json字符串
      * @return  Map集合
      */
     public static HashMap parse(String jsonStr){
-        return gson.fromJson(jsonStr, HashMap.class);
+        return parseToBean(jsonStr,HashMap.class);
+    }
+
+    /**
+     * 将Map集合转为json字符串
+     * @param beanMap Map集合
+     * @return json 字符串
+     */
+    public static String stringify(Map<String,Object> beanMap){
+        String serverResultJson = null;
+        try {
+            serverResultJson = objectMapper.writeValueAsString(beanMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return serverResultJson;
     }
 
     /**
@@ -34,7 +68,7 @@ public class JSON {
      * @return 通用服务器返回结果
      */
     public static ServerResultJson parseToServerResult(String jsonStr){
-        return gson.fromJson(jsonStr,ServerResultJson.class);
+        return parseToBean(jsonStr,ServerResultJson.class);
     }
 
     /**
@@ -44,40 +78,7 @@ public class JSON {
      * @return 目标类型
      */
     public static <T> T map2Bean(Map<String,Object> beanMap,Class<T> tClass){
-        T bean = null;
-        try {
-            bean = tClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        try {
-            BeanUtils.populate(bean,beanMap);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return bean;
-    }
-
-    /**
-     * 将Map集合转为json字符串
-     * @param beanMap Map集合
-     * @return json 字符串
-     */
-    public static String stringify(Map<String,Object> beanMap){
-        return gson.toJson(beanMap);
-    }
-
-    /**
-     * 将json 转为指定的类型
-     * @param jsonStr json字符串
-     * @param tClass 指定类型的class
-     * @return 指定类型
-     */
-    public static <T> T parseToBean(String jsonStr,Class<T> tClass){
-        return gson.fromJson(jsonStr,tClass);
+        String json = stringify(beanMap);
+        return parseToBean(json,tClass);
     }
 }

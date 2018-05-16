@@ -147,6 +147,7 @@ public class ClearEditText extends android.support.v7.widget.AppCompatEditText i
                 @Override
                 public void onAnimationStart(Animation animation) {
                     ClearEditText.this.setHint(shakingText);
+                    ClearEditText.this.setText("");
                     ClearEditText.this.setHintTextColor(Color.RED);
                     ClearEditText.this.requestFocus();
                 }

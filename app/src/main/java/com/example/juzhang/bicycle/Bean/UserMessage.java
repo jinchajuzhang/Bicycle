@@ -1,5 +1,6 @@
 package com.example.juzhang.bicycle.Bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -11,21 +12,21 @@ import java.io.Serializable;
  */
 
 public class UserMessage implements Serializable{
-    @SerializedName("username")
+    @JsonProperty("username")
     private String userName;
-    @SerializedName("password")
+    @JsonProperty("password")
     private String password;
-    @SerializedName("nickName")
+    @JsonProperty("nickName")
     private String userNickName;
-    @SerializedName("headPictureSrc")
+    @JsonProperty("headPictureSrc")
     private String userImageUrl;
     private String qq;
     private String email;
     private String realName;
     private String sex;
-    @SerializedName("mobile")
+    @JsonProperty("mobile")
     private String phone;
-    @SerializedName("weChart")
+    @JsonProperty("weChart")
     private String weChat;
     private String isused;
 
