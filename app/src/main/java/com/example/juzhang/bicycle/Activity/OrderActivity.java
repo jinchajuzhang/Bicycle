@@ -66,12 +66,12 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
         tv_title.setText(getString(R.string.tv_startrental));
         RentalCarMessage rentalCarMessage = ((RentalCarMessage)getIntent().getSerializableExtra("carmessage"));
 
-        if(rentalCarMessage.getImgUrl()==null||!rentalCarMessage.getImgUrl().equals(""))siv_pic.setImageUrl(rentalCarMessage.getImgUrl());
+       /* if(rentalCarMessage.getImgUrl()==null||!rentalCarMessage.getImgUrl().equals(""))siv_pic.setImageUrl(rentalCarMessage.getImgUrl());
         tv_carname.setText(rentalCarMessage.getCarName());
         tv_cardescription.setText(rentalCarMessage.getCarDescription());
         tv_price.setText(new DecimalFormat("0.00").format(rentalCarMessage.getRentalPrice()));
         tv_cartype.setText(rentalCarMessage.getCarType());
-        tv_purpose.setText(rentalCarMessage.getCarPurpose());
+        tv_purpose.setText(rentalCarMessage.getCarPurpose());*/
 
         mChoiseRideTypeDialog = new DialogUtils(this);
         countSumPrice();

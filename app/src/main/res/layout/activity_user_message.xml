@@ -102,7 +102,7 @@
                 android:onClick="buttonClick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                juzhang:name="电话号码"
+                juzhang:name="手机号"
                 juzhang:usertext="" />
 
             <com.example.juzhang.bicycle.View.MyUserMessageItemView

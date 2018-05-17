@@ -12,12 +12,13 @@ public class ContentValues {
     public static final String REGISTERDOMAIN = "http://"+ HOSTNAME +"/api/commonRegist";
     public static final String GETUSERMESSAGEDOMAIN = "http://"+ HOSTNAME +"/api/getUserDetail";
     public static final String SETUSERMESSAGEDOMAIN = "http://"+ HOSTNAME +"/api/updateUserDetail";
+    public static final String GETBICYCLEDOMAIN = "http://"+ HOSTNAME +"/api/getBicycleMessage";
     public static final String MENUTOTYPEDOMAIN = "http://"+HOSTNAME+"/API/bike/getBikeType";
 
     //极验验证第一次验证URL
     public static final String CAPTCHAURL = "http://www.geetest.com/demo/gt/register-slide";
     //极验验证第二次验证URL
-    public static final String VALIDATEURL = "http://www.geetest.com/demo/gt/register-slide";
+    public static final String VALIDATEURL = "http://"+ HOSTNAME +"/api/getGeeVerify";
 
     public static final String USERMESSAGE = "usermessage";
     public static final String COOKIE = "cookie";

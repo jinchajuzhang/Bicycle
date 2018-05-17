@@ -32,6 +32,7 @@ import com.example.juzhang.bicycle.Bean.RentalCarMessage;
 import com.example.juzhang.bicycle.Bean.RentalHotMessage;
 import com.example.juzhang.bicycle.Bean.RentalMenuMessage;
 import com.example.juzhang.bicycle.Utils.L;
+import com.example.juzhang.bicycle.Utils.Net;
 import com.example.juzhang.bicycle.Utils.SharedPreferencesUtils;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -126,7 +127,7 @@ public class RentalFragment extends Fragment {
     private void initDate() {
         //刷新数据
         reflashHot();
-        getMenuFromServer();
+        //getMenuFromServer();
         reflashCarMessage();
     }
 
@@ -245,28 +246,23 @@ public class RentalFragment extends Fragment {
      * 刷新车商品信息
      */
     private void reflashCarMessage() {
-        goodsList = new ArrayList<>();
-        //这里暂时模拟手动数据，后面添加网络异步请求，进行刷新
+        Map<String,Object> params = new HashMap<>();
+        params.put("currentPage",1);
+        params.put("perPageItems",20);
+        Net.post(this.getContext(), ContentValues.GETBICYCLEDOMAIN, params, new Net.netCallBack() {
+            @Override
+            public void success(String data) {
+                L.d(data);
+            }
+
+            @Override
+            public void error(Throwable ex) {
+
+            }
+        });
+        /*goodsList = new ArrayList<>();
+        //设置单车数据
         RentalCarMessage carMessage = new RentalCarMessage();
-        carMessage.setImgUrl("");
-        carMessage.setCarName("单车的名字");
-        carMessage.setCarDescription("显示的单车的简介");
-        carMessage.setRentalPrice(10);
-
-        RentalCarMessage carMessage2 = new RentalCarMessage();
-        carMessage2.setImgUrl("");
-        carMessage2.setCarName("单车的名字");
-        carMessage2.setCarDescription("显示的单车的简介");
-        carMessage2.setRentalPrice(20.3f);
-        carMessage2.setType(2);
-
-        goodsList.add(carMessage);
-        goodsList.add(carMessage2);
-        goodsList.add(carMessage);
-        goodsList.add(carMessage);
-        goodsList.add(carMessage);
-        goodsList.add(carMessage);
-        goodsList.add(carMessage);
 
         //刷新Adapter
         RentalGoodsAdapter goodsAdapter = new RentalGoodsAdapter(getContext(), goodsList);
@@ -280,11 +276,7 @@ public class RentalFragment extends Fragment {
                 }
                 //手动构建数据
                 RentalCarMessage rentalCarMessage = new RentalCarMessage();
-                rentalCarMessage.setCarName("单车名");
-                rentalCarMessage.setCarType("单车类型");
-                rentalCarMessage.setCarPurpose("单车用途");
-                rentalCarMessage.setCarDescription("这里是单车的一些简介，用于显示单车的一些信息。");
-                rentalCarMessage.setRentalPrice(100.5f);
+                //这里传递单车信息
 
                 Intent intent = new Intent(getActivity(), OrderActivity.class);
                 intent.putExtra("carmessage", (Serializable) rentalCarMessage);
@@ -314,7 +306,7 @@ public class RentalFragment extends Fragment {
             }
         });
         rv_display.setLoadingMoreEnabled(false);
-        rv_display.setAdapter(goodsAdapter);
+        rv_display.setAdapter(goodsAdapter);*/
     }
 
     /**

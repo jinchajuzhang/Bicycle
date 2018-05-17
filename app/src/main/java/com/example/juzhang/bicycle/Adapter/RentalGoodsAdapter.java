@@ -50,7 +50,7 @@ public class RentalGoodsAdapter extends RecyclerView.Adapter implements View.OnC
         ((MyViewHolder)holder).itemView.setOnClickListener(this);
 
         RentalCarMessage rentalCarMessage = carMessageList.get(position);
-        String imgUrl = rentalCarMessage.getImgUrl();
+        String imgUrl = rentalCarMessage.getBicycleMessageMainPictureSrc();
 
         //设置图片
         if(imgUrl==null||imgUrl.equals("")){
@@ -59,12 +59,12 @@ public class RentalGoodsAdapter extends RecyclerView.Adapter implements View.OnC
             ((MyViewHolder)holder).iv_carpicture.setImageUrl(imgUrl);
         }
 
-        ((MyViewHolder)holder).tv_carname.setText(rentalCarMessage.getCarName());                    //设置车名
-        ((MyViewHolder)holder).tv_discription.setText(rentalCarMessage.getCarDescription());         //设置描述
-        String price = new DecimalFormat(".00").format(rentalCarMessage.getRentalPrice())+"/时";
+        ((MyViewHolder)holder).tv_carname.setText(rentalCarMessage.getBicycleMessageName());                    //设置车名
+        ((MyViewHolder)holder).tv_discription.setText(rentalCarMessage.getBicycleMessageDiscription());         //设置描述
+        String price = new DecimalFormat(".00").format(rentalCarMessage.getBicycleMessageStorePrice())+"/时";
         ((MyViewHolder)holder).tv_price.setText(price);                  //设置价格
 
-        switch (rentalCarMessage.getType()){
+        switch (rentalCarMessage.getHotType()){
             case 0://不设置
                 break;
             case 1://设置为new

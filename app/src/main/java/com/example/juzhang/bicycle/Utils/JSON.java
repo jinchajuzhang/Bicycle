@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class JSON {
 
-    private static Gson gson = new Gson();
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
@@ -80,5 +79,36 @@ public class JSON {
     public static <T> T map2Bean(Map<String,Object> beanMap,Class<T> tClass){
         String json = stringify(beanMap);
         return parseToBean(json,tClass);
+    }
+
+    /**
+     *
+     * @param bean
+     * @param <T>
+     * @return
+     */
+    public static<T> Map<String,Object> bean2Map(T bean){
+        Map<String,Object> resultMap = null;
+        try {
+            resultMap = objectMapper.readValue(objectMapper.writeValueAsString(bean),HashMap.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultMap;
+    }
+
+    /**
+     * 将实体Bean转成json字符串
+     * @param bean 实体Bean
+     * @return json字符串
+     */
+    public static<T> String bean2String(T bean){
+        String result = "{}";
+        try {
+            result = objectMapper.writeValueAsString(bean);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

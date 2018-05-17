@@ -20,8 +20,6 @@ import com.example.juzhang.bicycle.Utils.JSON;
 import com.example.juzhang.bicycle.Utils.L;
 import com.example.juzhang.bicycle.Utils.Net;
 import com.example.juzhang.bicycle.View.ClearEditText;
-import com.geetest.sdk.Bind.GT3GeetestBindListener;
-import com.geetest.sdk.Bind.GT3GeetestUtilsBind;
 import com.geetest.sdk.GT3GeetestButton;
 import com.geetest.sdk.GT3GeetestListener;
 import com.geetest.sdk.GT3GeetestUtils;
@@ -34,6 +32,8 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private DialogUtils mDialogUtils;
+    private HashMap verifyMap;
+    private GT3GeetestUtils gt3GeetestUtils;
 
     private ClearEditText cet_username;
     private ClearEditText cet_password;
@@ -94,6 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        if(gt3GeetestUtils!=null){
+            gt3GeetestUtils.cancelUtils();
+        }
+        super.onDestroy();
+    }
+
     /**
      * 返回按钮
      * @param view 控件
@@ -140,8 +148,8 @@ public class RegisterActivity extends AppCompatActivity {
      * 初始化数据
      */
     private void initData() {
-        GT3GeetestUtils instance = GT3GeetestUtils.getInstance(RegisterActivity.this);
-        instance.getGeetest(ContentValues.CAPTCHAURL,ContentValues.VALIDATEURL, null, new GT3GeetestListener() {
+        gt3GeetestUtils = GT3GeetestUtils.getInstance(RegisterActivity.this);
+        gt3GeetestUtils.getGeetest(ContentValues.VALIDATEURL,ContentValues.VALIDATEURL, null, new GT3GeetestListener() {
             @Override
             public void gt3FirstResult(JSONObject jsonObject) {
                 super.gt3FirstResult(jsonObject);
@@ -149,10 +157,22 @@ public class RegisterActivity extends AppCompatActivity {
                 L.v(test);
             }
 
+            /**
+             * 极验验证滑动验证成功
+             * @param s 验证结果
+             */
             @Override
             public void gt3DialogSuccessResult(String s) {
                 super.gt3DialogSuccessResult(s);
-                L.v(s);
+            }
+            /**
+             * 拿到二次验证需要的数据
+             */
+            @Override
+            public void gt3GetDialogResult(String result) {
+                L.d(result);
+                verifyMap = JSON.parse(result);
+                gt3GeetestUtils.gt3TestFinish();
             }
         });
     }
@@ -168,6 +188,10 @@ public class RegisterActivity extends AppCompatActivity {
         params.put("password",userMessage.getPassword());
         params.put("mobile",userMessage.getPhone());
         params.put("email",userMessage.getEmail());
+        params.put("geeVerify",true);
+        if(verifyMap!=null&&verifyMap.size()>0)
+            params.putAll((Map<String,Object>)verifyMap);
+        L.d(params.toString());
         Net.post(this, ContentValues.REGISTERDOMAIN, params, new Net.netCallBack() {
             @Override
             public void success(String data) {
@@ -179,7 +203,7 @@ public class RegisterActivity extends AppCompatActivity {
                         msg.obj = result.getMessage();
                         myHandler.sendMessage(msg);
                         break;
-                    case 1://成功
+                    case 200://成功
                         myHandler.sendEmptyMessage(MyHandler.REGISTERSUCCESS);
                         break;
                 }

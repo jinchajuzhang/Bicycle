@@ -2,12 +2,14 @@ package com.example.juzhang.bicycle.Activity;
 
 import android.content.Intent;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -146,9 +148,6 @@ public class HomeActivity extends FragmentActivity implements ViewPager.OnPageCh
             case R.id.rb_home_return:
                 vp_fragmentviewpager.setCurrentItem(1,false);
                 break;
-/*            case R.id.rb_home_buy:
-                vp_fragmentviewpager.setCurrentItem(2,false);
-                break;*/
             case R.id.rb_home_my:
                 vp_fragmentviewpager.setCurrentItem(3,false);
                 break;
@@ -191,6 +190,13 @@ public class HomeActivity extends FragmentActivity implements ViewPager.OnPageCh
         @Override
         public int getCount() {
             return mFragmentList.size();
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            L.d("daole");
+            return super.instantiateItem(container, position);
         }
     }
 }

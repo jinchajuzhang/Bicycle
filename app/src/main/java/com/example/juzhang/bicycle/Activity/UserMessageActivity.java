@@ -13,7 +13,9 @@ import com.example.juzhang.bicycle.Bean.ServerResultJson;
 import com.example.juzhang.bicycle.Bean.UserMessage;
 import com.example.juzhang.bicycle.R;
 import com.example.juzhang.bicycle.Utils.DialogUtils;
+import com.example.juzhang.bicycle.Utils.JSON;
 import com.example.juzhang.bicycle.Utils.L;
+import com.example.juzhang.bicycle.Utils.Net;
 import com.example.juzhang.bicycle.Utils.SharedPreferencesUtils;
 import com.example.juzhang.bicycle.Utils.UserMessageUtils;
 import com.example.juzhang.bicycle.View.MyUserMessageItemView;
@@ -24,6 +26,8 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -144,7 +148,7 @@ public class UserMessageActivity extends AppCompatActivity {
                 mDialogUtils.startUserMessageChangeDialog("修改昵称", mmiv_usermessage_nickname.getUserText(), new DialogUtils.OnOkClickedListener() {
                     @Override
                     public void onOkClicked(String message) {
-                        prepareData("nickname",message);
+                        prepareData("nickName",message);
                     }
                 });
                 break;
@@ -168,7 +172,7 @@ public class UserMessageActivity extends AppCompatActivity {
                 mDialogUtils.startUserMessageChangeDialog("修改真实姓名", mmiv_usermessage_realname.getUserText(), new DialogUtils.OnOkClickedListener() {
                     @Override
                     public void onOkClicked(String message) {
-                        prepareData("realname",message);
+                        prepareData("realName",message);
                     }
                 });
                 break;
@@ -205,40 +209,35 @@ public class UserMessageActivity extends AppCompatActivity {
      * @param value 值
      */
     private void prepareData(String key, String value) {
-        Map<String,String> dataMap = new HashMap<>();
-        dataMap.put(key,value);
-        submitMessage(dataMap);
+        UserMessage userMessage = new UserMessage();
+        Map<String, Object> beanMap = JSON.bean2Map(userMessage);
+        for(String mapKey :beanMap.keySet()){
+            if(mapKey.toLowerCase().equals(key.toLowerCase())){
+                beanMap.put(mapKey,value);
+                break;
+            }
+        }
+        submitMessage(JSON.map2Bean(beanMap,UserMessage.class));
     }
 
     /**
      * 提交信息
-     * @param map 信息map
+     * @param userMessage 用户信息
      */
-    private void submitMessage(Map<String, String> map) {
-        Set<Map.Entry<String, String>> entries = map.entrySet();
-        RequestParams requestParams = new RequestParams(ContentValues.SETUSERMESSAGEDOMAIN);
-        for (Map.Entry<String, String> next : entries) {
-            requestParams.addParameter(next.getKey(),next.getValue());
-        }
+    private void submitMessage(UserMessage userMessage) {
         final Message msg  = Message.obtain();
         mDialogUtils.startWaitingDialog(View.inflate(this,R.layout.dialog_waiting,null));
-        x.http().post(requestParams, new Callback.CacheCallback<String>() {
+        Net.post(this, ContentValues.SETUSERMESSAGEDOMAIN, JSON.bean2Map(userMessage), new Net.netCallBack() {
             @Override
-            public boolean onCache(String result) {
-                return false;
-            }
-            @Override
-            public void onSuccess(String result) {
-                L.v("result1:"+result);
-                Gson gson = new Gson();
-                ServerResultJson serverResultJson = gson.fromJson(result, ServerResultJson.class);
-                switch(serverResultJson.getCode()){
+            public void success(String data) {
+                ServerResultJson result = JSON.parseToServerResult(data);
+                switch(result.getCode()){
                     case 0:
                         msg.what = MyHandler.FAILD;
-                        msg.obj = serverResultJson.getMessage();
+                        msg.obj = result.getMessage();
                         myHandler.sendMessage(msg);
                         break;
-                    case 1:
+                    case 200:
                         UserMessageUtils userMessageUtils = new UserMessageUtils(UserMessageActivity.this);
                         userMessageUtils.getUserMessageFromServer(new UserMessageUtils.OnUserMessageGetFinishListener() {
                             @Override
@@ -255,16 +254,11 @@ public class UserMessageActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
+            public void error(Throwable ex) {
                 msg.what = MyHandler.FAILD;
                 msg.obj = "网络错误，请稍后再试";
                 myHandler.sendMessage(msg);
             }
-            @Override
-            public void onCancelled(CancelledException cex) {}
-
-            @Override
-            public void onFinished() {}
         });
     }
 }
