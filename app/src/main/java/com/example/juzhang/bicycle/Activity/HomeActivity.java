@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,11 +31,12 @@ import java.util.List;
 
 
 
-public class HomeActivity extends FragmentActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends FragmentActivity implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private List<Fragment> mFragmentList;
 
     private ViewPager vp_fragmentviewpager;
+    private  MyFragementViewPagerAdapter myFragementViewPagerAdapter;
     private RadioGroup rg_bottom;
 
 
@@ -61,11 +64,12 @@ public class HomeActivity extends FragmentActivity implements ViewPager.OnPageCh
     private void initData() {
         mFragmentList = new ArrayList<>();
         mFragmentList.addAll(Arrays.asList(new RentalFragment(),new ReturnFragment(),new MyFragment()));
-
-        vp_fragmentviewpager.setAdapter(new MyFragementViewPagerAdapter(getSupportFragmentManager()));
+        myFragementViewPagerAdapter = new MyFragementViewPagerAdapter(getSupportFragmentManager(),mFragmentList);
+        vp_fragmentviewpager.setAdapter(myFragementViewPagerAdapter);
         vp_fragmentviewpager.addOnPageChangeListener(this);
 
         rg_bottom.setOnCheckedChangeListener(this);
+        findViewById(R.id.rb_home_rental).setOnClickListener(this);
     }
 
     /**
@@ -85,12 +89,6 @@ public class HomeActivity extends FragmentActivity implements ViewPager.OnPageCh
                     rb_return.setChecked(true);
                 }
                 break;
-/*            case 2:
-                RadioButton rb_buy = ((RadioButton)findViewById(R.id.rb_home_buy));
-                if(!rb_buy.isChecked()){
-                    rb_buy.setChecked(true);
-                }
-                break;*/
             case 2:
                 RadioButton rb_my = ((RadioButton)findViewById(R.id.rb_home_my));
                 if(!rb_my.isChecked()){
@@ -173,30 +171,41 @@ public class HomeActivity extends FragmentActivity implements ViewPager.OnPageCh
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.rb_home_rental){
+            if(vp_fragmentviewpager.getCurrentItem()==0){
+                if(myFragementViewPagerAdapter!=null){
+                    ((RentalFragment)myFragementViewPagerAdapter.getItem(0)).initDate();
+                }
+            }
+        }
+    }
+
     /**
      * ViewPager适配器
      */
     private class MyFragementViewPagerAdapter extends FragmentPagerAdapter{
 
-        MyFragementViewPagerAdapter(FragmentManager fm) {
+        List<Fragment> fl;
+
+        MyFragementViewPagerAdapter(FragmentManager fm, List<Fragment> fl) {
             super(fm);
+            this.fl = fl;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            return fl.get(position);
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
+            return fl.size();
         }
 
-        @NonNull
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            L.d("daole");
-            return super.instantiateItem(container, position);
+        public void setItemList(List<Fragment> fl){
+            this.fl = fl;
         }
     }
 }

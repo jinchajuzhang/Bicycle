@@ -25,12 +25,14 @@ import com.example.juzhang.bicycle.Activity.OrderActivity;
 import com.example.juzhang.bicycle.Adapter.RentalGoodsAdapter;
 import com.example.juzhang.bicycle.Adapter.RentalHotPagerAdapter;
 import com.example.juzhang.bicycle.Adapter.RentalMenuAdapter;
+import com.example.juzhang.bicycle.Bean.ServerResultJson;
 import com.example.juzhang.bicycle.ContentValues.ContentValues;
 import com.example.juzhang.bicycle.Bean.MenuServerResultJson;
 import com.example.juzhang.bicycle.R;
 import com.example.juzhang.bicycle.Bean.RentalCarMessage;
 import com.example.juzhang.bicycle.Bean.RentalHotMessage;
 import com.example.juzhang.bicycle.Bean.RentalMenuMessage;
+import com.example.juzhang.bicycle.Utils.JSON;
 import com.example.juzhang.bicycle.Utils.L;
 import com.example.juzhang.bicycle.Utils.Net;
 import com.example.juzhang.bicycle.Utils.SharedPreferencesUtils;
@@ -124,7 +126,7 @@ public class RentalFragment extends Fragment {
     /**
      * 初始化数据
      */
-    private void initDate() {
+    public void initDate() {
         //刷新数据
         reflashHot();
         //getMenuFromServer();
@@ -207,6 +209,7 @@ public class RentalFragment extends Fragment {
         vp_hot.post(new Runnable() {
             @Override
             public void run() {
+                myHandler.removeCallbacksAndMessages(null);
                 myHandler.sendEmptyMessage(MyHandler.CHANGEHOTPAGERITEM);
             }
         });
@@ -252,7 +255,54 @@ public class RentalFragment extends Fragment {
         Net.post(this.getContext(), ContentValues.GETBICYCLEDOMAIN, params, new Net.netCallBack() {
             @Override
             public void success(String data) {
-                L.d(data);
+                List<Map<String,Object>> result = (List<Map<String, Object>>)JSON.parseToServerResult(data).getData();
+                goodsList = new ArrayList<>();
+                for(Map<String,Object> map : result){
+                    goodsList.add(JSON.map2Bean(map, RentalCarMessage.class));
+                }
+                //刷新Adapter
+                RentalGoodsAdapter goodsAdapter = new RentalGoodsAdapter(getContext(), goodsList);
+                goodsAdapter.setOnItemClickListener(new RentalGoodsAdapter.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(int postion) {
+                        //Toast.makeText(getContext(),"点击了第"+postion+"个item",Toast.LENGTH_SHORT).show();
+                        if(!checkLogin()) {
+                            getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class),ContentValues.RETURNTOLOGIN);
+                            return;
+                        }
+                        //手动构建数据
+                        RentalCarMessage rentalCarMessage = new RentalCarMessage();
+                        //这里传递单车信息
+
+                        Intent intent = new Intent(getActivity(), OrderActivity.class);
+                        intent.putExtra("carmessage", (Serializable) rentalCarMessage);
+                        startActivity(intent);
+                    }
+                });
+
+                rv_display.setLayoutManager(new LinearLayoutManager(getContext()));
+                //设置商品间隙
+                rv_display.addItemDecoration(new RecyclerView.ItemDecoration() {
+                    @Override
+                    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                        int childAdapterPosition = parent.getChildAdapterPosition(view);
+                        if(childAdapterPosition<parent.getAdapter().getItemCount()&&childAdapterPosition>0)
+                            outRect.bottom = 5;
+                    }
+                });
+                //设置刷新监听
+                rv_display.setLoadingListener(new XRecyclerView.LoadingListener() {
+                    @Override
+                    public void onRefresh() {
+                        rv_display.refreshComplete();
+                    }
+                    @Override
+                    public void onLoadMore() {
+                        rv_display.loadMoreComplete();
+                    }
+                });
+                rv_display.setLoadingMoreEnabled(false);
+                rv_display.setAdapter(goodsAdapter);
             }
 
             @Override
@@ -260,53 +310,6 @@ public class RentalFragment extends Fragment {
 
             }
         });
-        /*goodsList = new ArrayList<>();
-        //设置单车数据
-        RentalCarMessage carMessage = new RentalCarMessage();
-
-        //刷新Adapter
-        RentalGoodsAdapter goodsAdapter = new RentalGoodsAdapter(getContext(), goodsList);
-        goodsAdapter.setOnItemClickListener(new RentalGoodsAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(int postion) {
-                //Toast.makeText(getContext(),"点击了第"+postion+"个item",Toast.LENGTH_SHORT).show();
-                if(!checkLogin()) {
-                    getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class),ContentValues.RETURNTOLOGIN);
-                    return;
-                }
-                //手动构建数据
-                RentalCarMessage rentalCarMessage = new RentalCarMessage();
-                //这里传递单车信息
-
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                intent.putExtra("carmessage", (Serializable) rentalCarMessage);
-                startActivity(intent);
-            }
-        });
-
-        rv_display.setLayoutManager(new LinearLayoutManager(getContext()));
-        //设置商品间隙
-        rv_display.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int childAdapterPosition = parent.getChildAdapterPosition(view);
-                if(childAdapterPosition<parent.getAdapter().getItemCount()&&childAdapterPosition>0)
-                    outRect.bottom = 5;
-            }
-        });
-        //设置刷新监听
-        rv_display.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                rv_display.refreshComplete();
-            }
-            @Override
-            public void onLoadMore() {
-                rv_display.loadMoreComplete();
-            }
-        });
-        rv_display.setLoadingMoreEnabled(false);
-        rv_display.setAdapter(goodsAdapter);*/
     }
 
     /**

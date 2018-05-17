@@ -170,7 +170,6 @@ public class RegisterActivity extends AppCompatActivity {
              */
             @Override
             public void gt3GetDialogResult(String result) {
-                L.d(result);
                 verifyMap = JSON.parse(result);
                 gt3GeetestUtils.gt3TestFinish();
             }
