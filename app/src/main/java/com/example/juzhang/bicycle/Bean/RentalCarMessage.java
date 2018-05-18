@@ -33,6 +33,8 @@ public class RentalCarMessage implements Serializable{
     private Boolean bicycleMessageStoreRecommend;
     private Boolean bicycleMessageStoreIsSell;
     private String bicycleMessageCreateTime;
+    private String bicycleMessageExtraPictureSrc;
+
     //热点类型:0代表 不设置，1代表 new，2代表 hot
     private Integer hotType;
 
@@ -202,6 +204,14 @@ public class RentalCarMessage implements Serializable{
 
     public void setBicycleMessageCreateTime(String bicycleMessageCreateTime) {
         this.bicycleMessageCreateTime = bicycleMessageCreateTime;
+    }
+
+    public String getBicycleMessageExtraPictureSrc() {
+        return bicycleMessageExtraPictureSrc;
+    }
+
+    public void setBicycleMessageExtraPictureSrc(String bicycleMessageExtraPictureSrc) {
+        this.bicycleMessageExtraPictureSrc = bicycleMessageExtraPictureSrc;
     }
 
     public Integer getHotType() {

@@ -1,6 +1,7 @@
 package com.example.juzhang.bicycle.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,6 +25,7 @@ public class RentalContentAdapter extends RecyclerView.Adapter{
         this.context = context;
     }
 
+    @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //View view = View.inflate(context, R.layout.item_rental_content,null);

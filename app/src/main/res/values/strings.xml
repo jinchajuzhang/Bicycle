@@ -79,4 +79,5 @@
     <string name="tv_hour">/小时</string>
     <string name="tv_inputphone">请输入手机号码</string>
     <string name="tv_pleasecomfirmpassword">请确认密码</string>
+    <string name="bicycle_detail">单车详情</string>
 </resources>

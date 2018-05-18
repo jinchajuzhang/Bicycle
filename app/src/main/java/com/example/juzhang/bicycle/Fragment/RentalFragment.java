@@ -1,5 +1,6 @@
 package com.example.juzhang.bicycle.Fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -17,15 +18,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.example.juzhang.bicycle.Activity.BicycleDetailActivity;
 import com.example.juzhang.bicycle.Activity.LoginActivity;
-import com.example.juzhang.bicycle.Activity.OrderActivity;
 import com.example.juzhang.bicycle.Adapter.RentalGoodsAdapter;
-import com.example.juzhang.bicycle.Adapter.RentalHotPagerAdapter;
+import com.example.juzhang.bicycle.Adapter.MyViewPagerAdapter;
 import com.example.juzhang.bicycle.Adapter.RentalMenuAdapter;
-import com.example.juzhang.bicycle.Bean.ServerResultJson;
 import com.example.juzhang.bicycle.ContentValues.ContentValues;
 import com.example.juzhang.bicycle.Bean.MenuServerResultJson;
 import com.example.juzhang.bicycle.R;
@@ -136,6 +137,7 @@ public class RentalFragment extends Fragment {
     /**
      * 刷新热点
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void reflashHot() {
         //初始化数据，后期加为网络异步请求
         String desc1 = "单车的描述";
@@ -149,7 +151,7 @@ public class RentalFragment extends Fragment {
         rentalHotMessage2.setDescription(desc2);
         rentalHotMessage2.setSmartImageViewUrl("");
         rentalHotMessage3.setDescription(desc3);
-        rentalHotMessage3.setSmartImageViewUrl("");
+        rentalHotMessage3.setSmartImageViewUrl(ContentValues.HOST+"/easyBicycle/uploadPicture/41b5f297-5744-11e8-b8ad-f0761c2c2b4b2.jpg");
         rentalHotMessage1.setType(1);
         rentalHotMessage2.setType(2);
 
@@ -165,17 +167,20 @@ public class RentalFragment extends Fragment {
         mi_indicator.setNavigator(circleNavigator);
 
         //设置ViewPager
-        RentalHotPagerAdapter rentalHotPagerAdapter = new RentalHotPagerAdapter(getContext(), dataList, vp_hot) {
+        MyViewPagerAdapter myViewPagerAdapteriew = new MyViewPagerAdapter(getContext(), dataList, vp_hot) {
             @Override
             public View getItemView(Object data) {
                 RentalHotMessage tempData = (RentalHotMessage) data;
                 View view = View.inflate(getContext(), R.layout.view_rental_viewpagerhot, null);
                 //设置图片
                 String imgUrl = tempData.getSmartImageViewUrl();
+                SmartImageView smartImageView = view.findViewById(R.id.siv_rental_hotimage);
                 if (imgUrl == null || imgUrl.equals("")) {
-                    ((SmartImageView) view.findViewById(R.id.siv_rental_hotimage)).setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.icon_imagefaild));
+                    smartImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.icon_imagefaild));
                 } else {
-                    ((SmartImageView) view.findViewById(R.id.siv_rental_hotimage)).setImageUrl(imgUrl);
+                    //设置图片拉伸
+                    smartImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    smartImageView.setImageUrl(imgUrl);
                 }
                 //设置描述
                 ((TextView) view.findViewById(R.id.tv_rental_item_hotdescription)).setText(tempData.getDescription());
@@ -192,7 +197,7 @@ public class RentalFragment extends Fragment {
                 return view;
             }
         };
-        rentalHotPagerAdapter.setOnPageChangeListener(new RentalHotPagerAdapter.PageChangeListener() {
+        myViewPagerAdapteriew.setOnPageChangeListener(new MyViewPagerAdapter.PageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 mi_indicator.onPageScrolled(position,positionOffset,positionOffsetPixels);
@@ -242,7 +247,7 @@ public class RentalFragment extends Fragment {
             }
         });
         //设置adapter
-        vp_hot.setAdapter(rentalHotPagerAdapter);
+        vp_hot.setAdapter(myViewPagerAdapteriew);
     }
 
     /**
@@ -270,11 +275,9 @@ public class RentalFragment extends Fragment {
                             getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class),ContentValues.RETURNTOLOGIN);
                             return;
                         }
-                        //手动构建数据
-                        RentalCarMessage rentalCarMessage = new RentalCarMessage();
                         //这里传递单车信息
-
-                        Intent intent = new Intent(getActivity(), OrderActivity.class);
+                        RentalCarMessage rentalCarMessage = goodsList.get(postion);
+                        Intent intent = new Intent(getActivity(), BicycleDetailActivity.class);
                         intent.putExtra("carmessage", (Serializable) rentalCarMessage);
                         startActivity(intent);
                     }

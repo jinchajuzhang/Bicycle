@@ -30,7 +30,8 @@
         <activity android:name=".Activity.UserMessageActivity" />
         <activity android:name=".Activity.HotPointActivity" />
         <activity android:name=".Activity.AroundActivity" />
-        <activity android:name=".Activity.SettingActivity"></activity>
+        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.BicycleDetailActivity"></activity>
     </application>
 
 </manifest>

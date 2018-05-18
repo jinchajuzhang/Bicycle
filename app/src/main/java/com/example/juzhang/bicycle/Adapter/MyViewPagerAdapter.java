@@ -1,23 +1,28 @@
 package com.example.juzhang.bicycle.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.example.juzhang.bicycle.Activity.BicycleDetailActivity;
 import com.example.juzhang.bicycle.Utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 功能：热点Pager适配器(无限循环)
+ * 功能：自定义Pager适配器(无限循环)
  * 作者：JuZhang
  * 时间：2017/5/14
  */
 
-public abstract class RentalHotPagerAdapter<T> extends PagerAdapter implements ViewPager.OnPageChangeListener {
+public abstract class MyViewPagerAdapter<T> extends PagerAdapter implements ViewPager.OnPageChangeListener {
     private int currentPosition = 0;
     private Context mContext;
     private ArrayList<View> views;
@@ -25,7 +30,7 @@ public abstract class RentalHotPagerAdapter<T> extends PagerAdapter implements V
 
     private PageChangeListener listener;
 
-    protected RentalHotPagerAdapter(Context context, List<Object> datas, final ViewPager viewPager) {
+    protected MyViewPagerAdapter(Context context, List<Object> datas, final ViewPager viewPager) {
         mContext = context;
         views = new ArrayList<>();
             //如果数据大于一条
@@ -96,7 +101,8 @@ public abstract class RentalHotPagerAdapter<T> extends PagerAdapter implements V
         }else if(position==views.size()-1){
             position = 1;
         }
-        listener.onPageSelected(position-1);
+        if (listener!=null)
+            listener.onPageSelected(position-1);
     }
 
     @Override
@@ -110,7 +116,8 @@ public abstract class RentalHotPagerAdapter<T> extends PagerAdapter implements V
             //若当前为倒数第一张，设置页面为第二张
             mViewPager.setCurrentItem(1,false);
         }
-        listener.onPageScrollStateChanged(state);
+        if (listener!=null)
+            listener.onPageScrollStateChanged(state);
     }
 
     public interface PageChangeListener{
