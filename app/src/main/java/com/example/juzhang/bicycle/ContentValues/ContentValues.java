@@ -7,8 +7,8 @@ package com.example.juzhang.bicycle.ContentValues;
  */
 
 public class ContentValues {
-    //public static final String HOST = "http://"+"10.0.2.2:8080";
-    public static final String HOST = "http://"+"jinchajuzhang.imwork.net";
+    public static final String HOST = "http://"+"10.0.2.2:8080";
+    //public static final String HOST = "http://"+"jinchajuzhang.imwork.net";
     private static final String HOSTNAME = HOST+"/easyBicycle";
     public static final String LOGINDOMAIN = HOSTNAME +"/api/commonLogin";
     public static final String REGISTERDOMAIN = HOSTNAME +"/api/commonRegist";
@@ -17,7 +17,7 @@ public class ContentValues {
     public static final String GETBICYCLEDOMAIN = HOSTNAME +"/api/getBicycleMessage";
     public static final String GETBICYCLESPEC = HOSTNAME+"/api/getBicycleSpec";
     public static final String GETALIPAYSIGN = HOSTNAME+"/api/getAliPaySign";
-    public static final String ADDTOCARTS = HOSTNAME+"/api/addCarts";
+    public static final String ADDTOCARTS = HOSTNAME+"/api/saveBicycleToCart";
     public static final String MENUTOTYPEDOMAIN = HOSTNAME+"/API/bike/getBikeType";
 
     //极验验证第一次验证URL

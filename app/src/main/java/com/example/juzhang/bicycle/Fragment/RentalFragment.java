@@ -118,7 +118,6 @@ public class RentalFragment extends Fragment {
      * 初始化UI
      */
     private void initUI() {
-        rv_menu = (RecyclerView) oldView.findViewById(R.id.rv_rental_menu);
         rv_display = (XRecyclerView) oldView.findViewById(R.id.xrv_rental_display);
         vp_hot = (ViewPager) oldView.findViewById(R.id.vp_rental_hot);
         mi_indicator = (MagicIndicator) oldView.findViewById(R.id.mi_rental_magicindicator);

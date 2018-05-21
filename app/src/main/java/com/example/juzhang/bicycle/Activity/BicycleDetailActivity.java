@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.juzhang.bicycle.Adapter.MyViewPagerAdapter;
 import com.example.juzhang.bicycle.Bean.RentalCarMessage;
@@ -253,9 +254,7 @@ public class BicycleDetailActivity extends AppCompatActivity implements RadioGro
                 startActivity(intent);
                 break;
             case R.id.btn_bicycle_addcarts://加入购物车
-                Map<String,Object> params = new HashMap<>();
-                params.put("rentalCarMessage",rentalCarMessage);
-
+                Map<String, Object> params = new HashMap<>(JSON.bean2Map(rentalCarMessage));
                 StringBuilder specStr = new StringBuilder();
                 for(String specName : specMessage.keySet()){
                     specStr.append(specName).append("：").append(specMessage.get(specName)).append("     ");
@@ -265,13 +264,15 @@ public class BicycleDetailActivity extends AppCompatActivity implements RadioGro
                 Net.post(this, ContentValues.ADDTOCARTS, params, new Net.netCallBack() {
                     @Override
                     public void success(String data) {
-
+                        ServerResultJson result = JSON.parseToServerResult(data);
+                        if(result.getCode()==200){
+                            Toast.makeText(BicycleDetailActivity.this,"添加成功！",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(BicycleDetailActivity.this,"添加失败！",Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     @Override
-                    public void error(Throwable ex) {
-
-                    }
+                    public void error(Throwable ex) {}
                 });
                 break;
         }
