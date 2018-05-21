@@ -94,4 +94,5 @@
     <string name="title_activity_pay">PayActivity</string>
     <string name="s_confirmpay">确认支付</string>
     <string name="s_paytype">选择支付方式</string>
+    <string name="s_needpay">需要支付：</string>
 </resources>

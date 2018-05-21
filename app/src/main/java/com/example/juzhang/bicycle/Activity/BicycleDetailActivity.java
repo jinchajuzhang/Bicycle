@@ -185,6 +185,7 @@ public class BicycleDetailActivity extends AppCompatActivity implements RadioGro
             ((TextView)findViewById(R.id.tv_bicycle_discription)).setText(rentalCarMessage.getBicycleMessageDiscription());
             ((TextView)findViewById(R.id.tv_bicycle_rentalnumber)).setText((rentalCarMessage.getBicycleRentalNumber()+""));
             findViewById(R.id.btn_bicycle_submitorder).setOnClickListener(this);
+            findViewById(R.id.btn_bicycle_addcarts).setOnClickListener(this);
          }
     }
 
@@ -248,10 +249,30 @@ public class BicycleDetailActivity extends AppCompatActivity implements RadioGro
                 map.put("carmessage",rentalCarMessage);
                 map.put("specMessage",specMessage);
                 list.add(map);
-                list.add(map);
-                list.add(map);
                 intent.putExtra("carmessages",new SerializableList(list));
                 startActivity(intent);
+                break;
+            case R.id.btn_bicycle_addcarts://加入购物车
+                Map<String,Object> params = new HashMap<>();
+                params.put("rentalCarMessage",rentalCarMessage);
+
+                StringBuilder specStr = new StringBuilder();
+                for(String specName : specMessage.keySet()){
+                    specStr.append(specName).append("：").append(specMessage.get(specName)).append("     ");
+                }
+                params.put("specStr",specStr.toString());
+
+                Net.post(this, ContentValues.ADDTOCARTS, params, new Net.netCallBack() {
+                    @Override
+                    public void success(String data) {
+
+                    }
+
+                    @Override
+                    public void error(Throwable ex) {
+
+                    }
+                });
                 break;
         }
     }

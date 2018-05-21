@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.AuthTask;
@@ -53,26 +54,6 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                     }
                     break;
                 }
-                /*case SDK_AUTH_FLAG: {
-                    @SuppressWarnings("unchecked")
-                    AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
-                    String resultStatus = authResult.getResultStatus();
-
-                    // 判断resultStatus 为“9000”且result_code
-                    // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
-                    if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
-                        // 获取alipay_open_id，调支付时作为参数extern_token 的value
-                        // 传入，则支付账户为该授权账户
-                        Toast.makeText(PayActivity.this,
-                                "授权成功\n" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT)
-                                .show();
-                    } else {
-                        // 其他状态值则为授权失败
-                        Toast.makeText(PayActivity.this,
-                                "授权失败" + String.format("authCode:%s", authResult.getAuthCode()), Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                }*/
                 default:
                     break;
             }
@@ -94,11 +75,13 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
     private void initUI() {
         RadioButton rb_alipay = findViewById(R.id.rb_paytype_alipay);
         RadioButton rb_wx = findViewById(R.id.rb_paytype_wx);
+        ((TextView)findViewById(R.id.tv_paytype_countprice)).setText((getIntent().getFloatExtra("countPrice",0.0F)+""));
         rb_alipay.setContentDescription("paygroup");
         rb_wx.setContentDescription("paygroup");
         rb_alipay.setOnClickListener(this);
         rb_wx.setOnClickListener(this);
         findViewById(R.id.btn_paytype_confirm).setOnClickListener(this);
+
     }
 
 
@@ -174,51 +157,6 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
             }
         });
     }
-    /**
-     * 支付宝账户授权业务
-     *
-     * @param v
-     */
- /*   public void authV2(View v) {
-        if (TextUtils.isEmpty(PID) || TextUtils.isEmpty(APPID)
-                || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))
-                || TextUtils.isEmpty(TARGET_ID)) {
-            new AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置PARTNER |APP_ID| RSA_PRIVATE| TARGET_ID")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialoginterface, int i) {
-                        }
-                    }).show();
-            return;
-        }
-
-
-        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
-        Map<String, String> authInfoMap = OrderInfoUtil2_0.buildAuthInfoMap(PID, APPID, TARGET_ID, rsa2);
-        String info = OrderInfoUtil2_0.buildOrderParam(authInfoMap);
-
-        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
-        String sign = OrderInfoUtil2_0.getSign(authInfoMap, privateKey, rsa2);
-        final String authInfo = info + "&" + sign;
-        Runnable authRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                // 构造AuthTask 对象
-                AuthTask authTask = new AuthTask(PayActivity.this);
-                // 调用授权接口，获取授权结果
-                Map<String, String> result = authTask.authV2(authInfo, true);
-
-                Message msg = new Message();
-                msg.what = SDK_AUTH_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-
-        // 必须异步调用
-        Thread authThread = new Thread(authRunnable);
-        authThread.start();
-    }*/
 
     /**
      * get the sdk version. 获取SDK版本号
