@@ -257,6 +257,7 @@ public class RentalFragment extends Fragment {
         Map<String,Object> params = new HashMap<>();
         params.put("currentPage",1);
         params.put("perPageItems",20);
+        params.put("type",0);
         Net.post(this.getContext(), ContentValues.GETBICYCLEDOMAIN, params, new Net.netCallBack() {
             @Override
             public void success(String data) {
@@ -271,10 +272,6 @@ public class RentalFragment extends Fragment {
                     @Override
                     public void OnItemClick(int postion) {
                         //Toast.makeText(getContext(),"点击了第"+postion+"个item",Toast.LENGTH_SHORT).show();
-                        if(!checkLogin()) {
-                            getActivity().startActivityForResult(new Intent(getContext(), LoginActivity.class),ContentValues.RETURNTOLOGIN);
-                            return;
-                        }
                         //这里传递单车信息
                         RentalCarMessage rentalCarMessage = goodsList.get(postion);
                         Intent intent = new Intent(getActivity(), BicycleDetailActivity.class);

@@ -1,210 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEE"
-    tools:context=".Activity.BicycleDetailActivity"
-    android:orientation="vertical"
-    >
-    <!--头部-->
-    <RelativeLayout
-        android:id="@+id/ll_order_head"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@drawable/shape_home_head"
-        android:layout_height="45dp"
-        >
-        <TextView
-            android:id="@+id/tv_order_head_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/bicycle_detail"
-            android:textSize="18sp"
-            android:gravity="center" />
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:onClick="backPress"
-            android:contentDescription="@string/iv_picture"
-            android:src="@drawable/ic_left" />
-    </RelativeLayout>
-    <!--单车详情图-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="220dp">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_bicycledetail_bicycleextraimg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        </android.support.v4.view.ViewPager>
-        <net.lucode.hackware.magicindicator.MagicIndicator
-            android:id="@+id/mi_bicycledetail_magicindicator"
-            android:layout_width="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="1dp"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
-    <!--单车简介-->
+    tools:context=".Activity.BicycleDetailActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFF"
-        android:padding="10dp"
-        >
+        android:background="#EEE"
+        android:orientation="vertical">
+        <!--头部-->
+        <RelativeLayout
+            android:id="@+id/ll_order_head"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_home_head"
+            android:layout_height="45dp"
+            >
+            <TextView
+                android:id="@+id/tv_order_head_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/bicycle_detail"
+                android:textSize="18sp"
+                android:gravity="center" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:onClick="backPress"
+                android:contentDescription="@string/iv_picture"
+                android:src="@drawable/ic_left" />
+        </RelativeLayout>
+        <!--单车详情图-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_bicycledetail_bicycleextraimg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            </android.support.v4.view.ViewPager>
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/mi_bicycledetail_magicindicator"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="1dp"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <!--单车简介-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_bicycle_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="30天VIP(高级账户)战争三部曲VIP互通 补给礼包 坦克世界直充"
-                android:textSize="15sp" />
-            <!--品牌-->
+            android:background="#FFF"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp"
+            >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                >
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tv_bicycle_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingTop="5dp"
-                    android:text="品牌："
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tv_bicycle_brand"
-                    android:layout_width="wrap_content"
+                    android:maxLines="2"
+                    android:textSize="15sp" />
+                <!--押金-->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingTop="5dp"
-                    android:text="阿迪达斯"
-                    android:textColor="#cccccc"
-                    android:layout_marginRight="5dp"
-                    android:textSize="13sp" />
-                <com.loopj.android.image.SmartImageView
-                    android:id="@+id/siv_bicycle_brand"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_bike"
-                    />
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/s_sign2"
+                        android:textColor="#cccccc"
+                        />
+                    <TextView
+                        android:id="@+id/tv_bicycle_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center_vertical"
+                        android:textColor="#cccccc"
+                        android:text="0.0"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="#cccccc"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/s_sign1"
+                        />
+                </LinearLayout>
+                <!--类型-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:text="@string/t_sign8"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tv_bicycle_typename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <!--品牌-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingTop="5dp"
+                        android:text="@string/t_sign7"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                    <com.loopj.android.image.SmartImageView
+                        android:id="@+id/siv_bicycle_brand"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tv_bicycle_brand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingTop="5dp"
+                        android:textColor="#cccccc"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <!--促销信息-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:text="@string/t_sign6"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tv_bicycle_promotion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <!--描述-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:text="@string/t_sign5"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tv_bicycle_discription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="5dp"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <!--付款总数-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp">
+                    <TextView
+                        android:id="@+id/tv_bicycle_rentalnumberlable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@string/s_sign4"
+                        android:layout_alignParentRight="true"
+                        android:textColor="#cccccc"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tv_bicycle_rentalnumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="100"
+                        android:textColor="#cccccc"
+                        android:layout_toLeftOf="@id/tv_bicycle_rentalnumberlable"
+                        android:textSize="13sp" />
+                </RelativeLayout>
             </LinearLayout>
-            <!--促销信息-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingTop="5dp"
-                    android:text="促销信息："
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tv_bicycle_promotion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingTop="5dp"
-                    android:text="这是一款很不错的单车"
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-            </LinearLayout>
-            <!--描述-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingTop="5dp"
-                    android:text="描述："
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tv_bicycle_discription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:paddingTop="5dp"
-                    android:text="这是一款很不错的单车"
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-            </LinearLayout>
-            <!--付款总数-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_bicycle_paycount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:layout_alignParentRight="true"
-                    android:text="203人付款"
-                    android:textColor="#cccccc"
-                    android:textSize="13sp" />
-            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
     <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/shape_itemtop_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:background="#FFF"
-        >
-        <TextView
-            android:id="@+id/tv_bicycle_specName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingTop="5dp"
-            android:text="规格"
-            android:textColor="#cccccc"
-            android:layout_marginRight="5dp"
-            android:textSize="13sp" />
+        android:layout_height="45dp">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_toRightOf="@id/tv_bicycle_specName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/s_sign3"
+                />
+            <TextView
+                android:id="@+id/tv_bicycle_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="0"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             >
-            <CheckBox
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="红色"
-                android:button="@null"
-                android:background="@drawable/selector_checkbox_self"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/s_sign7"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_bicycle_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="#F00"
+                android:text="0.0元"
+                android:layout_marginRight="15dp"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/btn_bicycle_addcarts"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textColor="#FFF"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/selector_btn_submit_bg_rl"
+                android:text="@string/s_addCarts"
+                />
+            <Button
+                android:id="@+id/btn_bicycle_submitorder"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:textColor="#FFF"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/selector_btn_submit_bg_rr"
+                android:text="@string/s_submitOrder"
                 />
         </LinearLayout>
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

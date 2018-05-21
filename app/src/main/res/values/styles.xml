@@ -1,5 +1,5 @@
 ﻿<resources>
-<!--                                          主题                                               -->
+    <!--                                          主题                                               -->
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -20,7 +20,7 @@
         <item name="android:windowBackground">@color/White</item>
     </style>
 
-<!--                                          动画风格                                               -->
+    <!--                                          动画风格                                               -->
     <!--spalshdialog退出动画风格-->
     <style name="DialogAnimationExitLeft">
         <item name="android:windowExitAnimation">@anim/dialog_exit_left</item>
@@ -29,7 +29,7 @@
     <style name="WaitingDialogAnimation">
         <item name="android:windowExitAnimation">@anim/dialog_exit_alpha</item>
     </style>
-<!--                                          属性提取                                              -->
+    <!--                                          属性提取                                              -->
     <!--radiobutton属性提取-->
     <style name="RadioButtonDrawableTop">
         <item name="android:layout_width">0dp</item>
@@ -68,7 +68,6 @@
     </style>
 
 
-
     <style name="CommTextStyle">                            <!--不含背景的文本字体格式-->
         <item name="android:textSize">16sp</item>
         <item name="android:textScaleX">1.2</item>
@@ -92,9 +91,14 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MyAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

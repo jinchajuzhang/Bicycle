@@ -50,4 +50,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
     implementation(name: 'geetest_testbutton_android_v3.5.3', ext: 'aar')
+    implementation files('libs/alipaySdk-20180403.jar')
 }

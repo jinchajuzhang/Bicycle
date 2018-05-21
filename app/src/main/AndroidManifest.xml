@@ -31,7 +31,11 @@
         <activity android:name=".Activity.HotPointActivity" />
         <activity android:name=".Activity.AroundActivity" />
         <activity android:name=".Activity.SettingActivity" />
-        <activity android:name=".Activity.BicycleDetailActivity"></activity>
+        <activity android:name=".Activity.BicycleDetailActivity" />
+        <activity
+            android:name=".Activity.PayActivity"
+            android:label="@string/title_activity_pay"
+            android:theme="@style/MyAppTheme" />
     </application>
 
 </manifest>

@@ -1,14 +1,19 @@
 package com.example.juzhang.bicycle.Activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.juzhang.bicycle.Bean.RentalCarMessage;
+import com.example.juzhang.bicycle.Bean.SerializableList;
+import com.example.juzhang.bicycle.ContentValues.ContentValues;
 import com.example.juzhang.bicycle.R;
 import com.example.juzhang.bicycle.Utils.DialogUtils;
 import com.example.juzhang.bicycle.View.ClearEditText;
@@ -17,6 +22,9 @@ import com.loopj.android.image.SmartImageView;
 
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -64,15 +72,26 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
      */
     private void initData() {
         tv_title.setText(getString(R.string.tv_startrental));
-        RentalCarMessage rentalCarMessage = ((RentalCarMessage)getIntent().getSerializableExtra("carmessage"));
+        SerializableList serializableList = (SerializableList) getIntent().getSerializableExtra("carmessages");
+        List<Map<String, Object>> carList = serializableList.getList();
+        LinearLayout root = findViewById(R.id.ll_order_bicycledetail);
+        for(Map<String,Object> listMap : carList){
+            RentalCarMessage rentalCarMessage = (RentalCarMessage) listMap.get("carmessage");
+            Map<String,Object> specMap = (Map<String, Object>) listMap.get("specMessage");
+            View tempItem = View.inflate(this, R.layout.item_order_bicycledetail, null);
+            tempItem.setContentDescription("cardetailitem");
+            ((SmartImageView)tempItem.findViewById(R.id.siv_order_pic)).setImageUrl(ContentValues.HOST+rentalCarMessage.getBicycleMessageMainPictureSrc(),R.drawable.ic_imagefaild);
+            ((TextView)tempItem.findViewById(R.id.tv_order_carname)).setText(rentalCarMessage.getBicycleMessageName());
 
-       /* if(rentalCarMessage.getImgUrl()==null||!rentalCarMessage.getImgUrl().equals(""))siv_pic.setImageUrl(rentalCarMessage.getImgUrl());
-        tv_carname.setText(rentalCarMessage.getCarName());
-        tv_cardescription.setText(rentalCarMessage.getCarDescription());
-        tv_price.setText(new DecimalFormat("0.00").format(rentalCarMessage.getRentalPrice()));
-        tv_cartype.setText(rentalCarMessage.getCarType());
-        tv_purpose.setText(rentalCarMessage.getCarPurpose());*/
-
+            StringBuilder specStr = new StringBuilder();
+            for(String specName : specMap.keySet()){
+                specStr.append(specName).append("：").append(specMap.get(specName)).append("     ");
+            }
+            ((TextView)tempItem.findViewById(R.id.tv_order_spec)).setText(specStr);
+            ((TextView)tempItem.findViewById(R.id.tv_order_price)).setText((rentalCarMessage.getBicycleMessageStorePrice()+""));
+            ((TextView)tempItem.findViewById(R.id.tv_order_deposit)).setText((rentalCarMessage.getBicycleMessageMarketPrice()+"元"));
+            root.addView(tempItem);
+        }
         mChoiseRideTypeDialog = new DialogUtils(this);
         countSumPrice();
     }
@@ -97,22 +116,13 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
      */
     private void initUI() {
         layout_choiseridetype = View.inflate(this, R.layout.view_choiseridetype, null);
-        tv_carnumber = (TextView) findViewById(R.id.tv_order_carnumber);
-        tv_cardescription = (TextView) findViewById(R.id.tv_order_cardescription);
-        tv_carname = (TextView) findViewById(R.id.tv_order_carname);
-        tv_purpose  = (TextView) findViewById(R.id.tv_order_purpose);
-        tv_cartype = (TextView) findViewById(R.id.tv_order_type);
-        tv_rentaltime = (TextView) findViewById(R.id.tv_order_rentaltime);
-        tv_price = (TextView) findViewById(R.id.tv_order_price);
         tv_sumprice = (TextView) findViewById(R.id.tv_order_sumprice);
         tv_distributiontype = (TextView) findViewById(R.id.tv_order_distributiontype);
         tv_title  = (TextView) findViewById(R.id.tv_order_head_title);
         moei_ridetoyou = (MyOrderExtraItem) layout_choiseridetype.findViewById(R.id.moei_order_ridetoyou);
         moei_ridetoyouself = (MyOrderExtraItem) layout_choiseridetype.findViewById(R.id.moei_order_ridetoyouself);
         cet_inputaddress = (ClearEditText) findViewById(R.id.cet_order_inputaddress);
-        siv_pic = (SmartImageView) findViewById(R.id.siv_order_pic);
         tv_contact_ridetoyouself = (TextView) findViewById(R.id.tv_order_contact_ridetoyouself);
-
         moei_ridetoyou.setOnCheckBoxCheckedListener(this);
         moei_ridetoyouself.setOnCheckBoxCheckedListener(this);
     }
@@ -127,58 +137,45 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
 
     /**
      * 增加数量
+     * @param v
      * @param offset 增加值
      */
-    private void addNum(int offset){
-        String temp = (Integer.parseInt((String) tv_carnumber.getText())+offset)+"";
-        tv_carnumber.setText(temp);
+    private void addNum(View v, int offset){
+        TextView carNumber = ((ViewGroup)v.getParent()).findViewById(R.id.tv_carnumber);
+        String temp = (Integer.parseInt((String) carNumber.getText())+offset)+"";
+        carNumber.setText(temp);
+        countSumPrice();
     }
 
     /**
      * 减少数量
+     * @param v
      * @param offset 减少值
      */
-    private void reduceNum(int offset){
-        int num = Integer.parseInt((String) tv_carnumber.getText());
+    private void reduceNum(View v, int offset){
+        TextView carNumber = ((ViewGroup)v.getParent()).findViewById(R.id.tv_carnumber);
+        int num = Integer.parseInt((String) carNumber.getText());
         num = num-offset>=0?num-offset:num;
         String temp1 = num+"";
-        tv_carnumber.setText(temp1);
-    }
-
-    /**
-     * 增加时间
-     * @param offset 增加值
-     */
-    private void addTime(float offset){
-        String temp = new DecimalFormat("0.0").format(Float.parseFloat((String) tv_rentaltime.getText()) + offset)+"";
-        tv_rentaltime.setText(temp);
-    }
-
-    /**
-     * 减少时间
-     * @param offset 减少值
-     */
-    private void reduceTime(float offset){
-        float time = Float.parseFloat((String) tv_rentaltime.getText());
-        time = time-offset>=0? time - offset :time;
-        String temp = new DecimalFormat("0.0").format(time)+"";
-        tv_rentaltime.setText(temp);
+        carNumber.setText(temp1);
+        countSumPrice();
     }
 
     /**
      * 计算总价
      */
     private void countSumPrice() {
-        if((tv_price.getText()).equals("未知"))return;
-        float price = Float.parseFloat((String)tv_price.getText());
-        int number = Integer.parseInt((String) tv_carnumber.getText());
-        float rentaltime = Float.parseFloat((String) tv_rentaltime.getText());
-        float sumprice = price*rentaltime*number;
-        if(sumprice>0){
-            sumprice+=checkDistributionType();
+        Float sumPrice = 0.0F;
+        ArrayList<View> viewGroupList = new ArrayList<>();
+        findViewById(R.id.ll_order_bicycledetail).findViewsWithText(viewGroupList,"cardetailitem",View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
+        if(viewGroupList.size()>=1){
+            for(View view : viewGroupList){
+                Float deposit = Float.parseFloat(((TextView)view.findViewById(R.id.tv_order_deposit)).getText().toString().replace("元",""));
+                Integer carNumber = Integer.parseInt(((TextView)view.findViewById(R.id.tv_carnumber)).getText().toString());
+                sumPrice += (deposit*carNumber);
+            }
         }
-        String sumpriceText = new DecimalFormat("0.00").format(sumprice)+"";
-        tv_sumprice.setText(sumpriceText);
+        ((TextView)findViewById(R.id.tv_order_sumprice)).setText((sumPrice+""));
     }
 
     /**
@@ -202,19 +199,11 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
     public void buttonClick(View v) {
         switch(v.getId()){
             case R.id.btn_order_reduce:
-                reduceNum(1);
+                reduceNum(v,1);
                 countSumPrice();
                 break;
             case R.id.btn_order_add:
-                addNum(1);
-                countSumPrice();
-                break;
-            case R.id.btn_order_timereduce:
-                reduceTime(0.5f);
-                countSumPrice();
-                break;
-            case R.id.btn_order_timeadd:
-                addTime(0.5f);
+                addNum(v,1);
                 countSumPrice();
                 break;
             case R.id.rl_order_distributiontype:
@@ -224,7 +213,10 @@ public class OrderActivity extends AppCompatActivity implements CompoundButton.O
                 closeChoiseRideTypeLayout();
                 break;
             case R.id.btn_order_submit:
-                showSubmitDialog();
+                //联网提交订单
+                Intent intent = new Intent(this, PayActivity.class);
+                intent.putExtra("countPrice",Float.parseFloat(((TextView)findViewById(R.id.tv_order_sumprice)).getText().toString()));
+                startActivity(intent);
                 break;
         }
     }

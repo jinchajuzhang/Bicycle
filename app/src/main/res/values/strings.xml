@@ -56,14 +56,14 @@
     <string name="btn_pressreturncar">点击还车</string>
     <string name="tv_nocartoreturn">您当前没有可以归还的车辆</string>
     <string name="tv_startrental">开始租车</string>
-    <string name="tv_rentalprivce">租用单价:￥</string>
+    <string name="tv_rentalprivce">租用单价：</string>
     <string name="tv_type">类型：</string>
     <string name="tv_purpose">用途：</string>
     <string name="tv_rentalnumber">租用数量</string>
     <string name="tv_rentaltime">租用时间(小时)</string>
     <string name="tv_inputleave">这里输入您的留言,对本次交易的说明...</string>
     <string name="tv_submit">提交订单</string>
-    <string name="tv_sumprice">总价：</string>
+    <string name="tv_sumprice">总租金：</string>
     <string name="tv_distribution">配送方式</string>
     <string name="tv_unknown">未知</string>
     <string name="_1">1</string>
@@ -80,4 +80,18 @@
     <string name="tv_inputphone">请输入手机号码</string>
     <string name="tv_pleasecomfirmpassword">请确认密码</string>
     <string name="bicycle_detail">单车详情</string>
+    <string name="s_submitOrder">提交订单</string>
+    <string name="s_addCarts">加入购物车</string>
+    <string name="s_sign1">元/小时</string>
+    <string name="s_sign2">单价:</string>
+    <string name="s_sign3">库存:</string>
+    <string name="s_sign4">人租过</string>
+    <string name="t_sign5">描述：</string>
+    <string name="t_sign6">促销信息：</string>
+    <string name="t_sign7">品牌：</string>
+    <string name="t_sign8">类型：</string>
+    <string name="s_sign7">押金：</string>
+    <string name="title_activity_pay">PayActivity</string>
+    <string name="s_confirmpay">确认支付</string>
+    <string name="s_paytype">选择支付方式</string>
 </resources>
